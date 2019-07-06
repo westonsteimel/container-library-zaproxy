@@ -1,8 +1,8 @@
-FROM westonsteimel/debian:sid-slim as builder
+FROM alpine:edge as builder
 
 ENV ZAPROXY_VERSION="w2019-07-01"
 
-RUN apt-get update && apt-get install -q -y --fix-missing \
+RUN apk update && apk --no-cache add \
     unzip \
     curl \
     wget \
@@ -28,30 +28,30 @@ RUN curl -s -L https://bitbucket.org/meszarv/webswing/downloads/webswing-2.5.10.
     
 RUN git clone --depth 1 --branch "${ZAPROXY_VERSION}" https://github.com/zaproxy/zaproxy.git /src 
 
-FROM openjdk:8-jdk-slim
+FROM westonsteimel/alpine-glibc:edge
 
-ENV DEBIAN_FRONTEND noninteractive
-
-RUN apt-get update && apt-get install -q -y --fix-missing \
+RUN apk update && apk --no-cache add \
 	net-tools \
-	python3-pip \
-	xvfb \
-	x11vnc && \
-	apt-get clean && \
-	rm -rf /var/lib/apt/lists/*
-
-RUN pip3 install --upgrade pip zapcli python-owasp-zap-v2.4
-
-RUN useradd -d /home/zap -m -s /bin/bash zap
-RUN echo zap:zap | chpasswd
-RUN mkdir /zap && chown zap:zap /zap
+	python3 \
+    openjdk8 \
+	xvfb-run \
+	x11vnc \
+    libxext-dev \
+    libxi-dev \
+    libxtst-dev \
+    libxrender-dev \
+    && pip3 install --upgrade pip zapcli python-owasp-zap-v2.4 \
+    && addgroup zap \
+    && adduser -G zap -s /bin/sh -D zap \
+    && mkdir /zap \
+    && chown zap:zap /zap \
+    && mkdir /home/zap/.vnc \
+    && ln -s /usr/glibc-compat/sbin/ldconfig /zap/ldconfig
 
 WORKDIR /zap
 
-RUN mkdir /home/zap/.vnc
-
-#ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
-ENV PATH $JAVA_HOME/bin:/zap/:$PATH
+ENV JAVA_HOME /usr/lib/jvm/java-1.8-openjdk/
+ENV PATH /zap/ldconfig:$JAVA_HOME/bin:/zap/:$PATH
 ENV ZAP_PATH /zap/zap.sh
 
 # Default port for use with zapcli
