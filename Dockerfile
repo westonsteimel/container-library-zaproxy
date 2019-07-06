@@ -33,21 +33,14 @@ FROM openjdk:8-jdk-slim
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -q -y --fix-missing \
-	make \
-	automake \
-	autoconf \
-	gcc g++ \
-	openbox \
-	xterm \
 	net-tools \
-	python-pip \
-	firefox-esr \
+	python3-pip \
 	xvfb \
 	x11vnc && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/*
 
-RUN pip install --upgrade pip zapcli python-owasp-zap-v2.4
+RUN pip3 install --upgrade pip zapcli python-owasp-zap-v2.4
 
 RUN useradd -d /home/zap -m -s /bin/bash zap
 RUN echo zap:zap | chpasswd
