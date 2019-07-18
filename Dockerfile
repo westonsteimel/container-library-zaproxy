@@ -1,7 +1,7 @@
 FROM westonsteimel/debian:sid-slim as builder
 
-LABEL version="w2019-07-10"
-ENV ZAPROXY_VERSION="w2019-07-10"
+LABEL version="w2019-07-17"
+ENV ZAPROXY_VERSION="w2019-07-17"
 
 RUN apt-get update && apt-get install -q -y --fix-missing \
     unzip \
