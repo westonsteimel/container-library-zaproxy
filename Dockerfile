@@ -2,7 +2,7 @@ FROM westonsteimel/debian:sid-slim as builder
 
 LABEL version="w2019-07-17"
 ENV ZAPROXY_VERSION="w2019-07-17"
-
+ENV WEBSWING_VERSION="2.6.3"
 RUN apt-get update && apt-get install -q -y --fix-missing \
     unzip \
     curl \
@@ -18,7 +18,7 @@ RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersio
     cp -R ZAP*/* . &&  \
     rm -R ZAP*
     
-RUN curl -s -L https://bitbucket.org/meszarv/webswing/downloads/webswing-2.5.10.zip > webswing.zip && \
+RUN curl -s -L "https://bitbucket.org/meszarv/webswing/downloads/webswing-${WEBSWING_VERSION}.zip" > webswing.zip && \
     unzip webswing.zip && \
     rm webswing.zip && \
     mv webswing-* webswing && \
