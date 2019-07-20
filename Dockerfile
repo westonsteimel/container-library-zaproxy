@@ -29,7 +29,7 @@ RUN curl -s -L "https://bitbucket.org/meszarv/webswing/downloads/webswing-${WEBS
     
 RUN git clone --depth 1 --branch "${ZAPROXY_VERSION}" https://github.com/zaproxy/zaproxy.git /src 
 
-FROM openjdk:11-jdk-slim
+FROM openjdk:11-jre-slim
 
 ENV DEBIAN_FRONTEND noninteractive
 
