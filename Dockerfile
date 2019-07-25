@@ -1,7 +1,7 @@
 FROM westonsteimel/debian:sid-slim as builder
 
-LABEL version="w2019-07-17"
-ENV ZAPROXY_VERSION="w2019-07-17"
+LABEL version="w2019-07-23"
+ENV ZAPROXY_VERSION="w2019-07-23"
 ENV WEBSWING_VERSION="2.6.3"
 RUN apt-get update && apt-get install -q -y --fix-missing \
     unzip \
