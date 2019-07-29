@@ -1,8 +1,13 @@
+ARG ZAPROXY_VERSION="w2019-07-23"                                                                                                                         
+ARG WEBSWING_VERSION="2.6.3"    
+
 FROM westonsteimel/debian:sid-slim as builder
 
-LABEL version="w2019-07-23"
-ENV ZAPROXY_VERSION="w2019-07-23"
-ENV WEBSWING_VERSION="2.6.3"
+ARG ZAPROXY_VERSION
+ARG WEBSWING_VERSION
+ENV ZAPROXY_VERSION="${ZAPROXY_VERSION}"
+ENV WEBSWING_VERSION="${WEBSWING_VERSION}"
+
 RUN apt-get update && apt-get install -q -y --fix-missing \
     unzip \
     curl \
@@ -31,6 +36,7 @@ RUN git clone --depth 1 --branch "${ZAPROXY_VERSION}" https://github.com/zaproxy
 
 FROM openjdk:11-jre-slim
 
+ARG ZAPROXY_VERSION
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update && apt-get install -q -y --fix-missing \
@@ -71,3 +77,7 @@ RUN chown -R zap:zap /zap
 USER zap
 
 HEALTHCHECK --retries=5 --interval=5s CMD zap-cli status
+
+LABEL org.opencontainers.image.url="https://github.com/westonsteimel/docker-zaproxy" \ 
+    org.opencontainers.image.source="https://github.com/westonsteimel/docker-zaproxy" \
+    org.opencontainers.image.version="${ZAPROXY_VERSION}"
