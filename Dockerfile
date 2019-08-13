@@ -1,7 +1,7 @@
 ARG ZAPROXY_VERSION="w2019-08-12"
 ARG WEBSWING_VERSION="2.6.4"
 
-FROM westonsteimel/debian:sid-slim as builder
+FROM debian:sid-slim as builder
 
 ARG ZAPROXY_VERSION
 ARG WEBSWING_VERSION
