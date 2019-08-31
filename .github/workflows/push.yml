@@ -13,11 +13,11 @@ jobs:
       with:
         args: build -t "${DOCKER_USERNAME}/zaproxy:latest" .
     - name: Docker Tag
-      uses: actions/docker/cli@master
+      uses: actions/docker/tag@master
       env:
         DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       with:
-        entrypoint: ./tag.sh
+        args: ${DOCKER_USERNAME}/zaproxy ${DOCKER_USERNAME}/zaproxy --no-ref --no-sha 
     - name: Login DockerHub
       uses: actions/docker/login@master
       env:

@@ -82,4 +82,5 @@ LABEL org.opencontainers.image.title="zaproxy" \
     org.opencontainers.image.description="zaproxy in Docker" \ 
     org.opencontainers.image.url="https://github.com/westonsteimel/docker-zaproxy" \ 
     org.opencontainers.image.source="https://github.com/westonsteimel/docker-zaproxy" \
-    org.opencontainers.image.version="${ZAPROXY_VERSION}"
+    org.opencontainers.image.version="${ZAPROXY_VERSION}" \
+    version="${ZAPROXY_VERSION}"
