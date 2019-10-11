@@ -1,4 +1,6 @@
-on: [push]
+on:
+  schedule:
+  - cron: '0 1 * * *'
 name: Build and deploy on push
 jobs:
   dockerhub_publish_weekly:
@@ -6,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Build and Publish master to DockerHub
+    - name: Build and Publish weekly to DockerHub
       uses: westonsteimel/action-docker-publish@master
       with:
         registry: 'docker.io'
