@@ -27,8 +27,6 @@ RUN curl -s -L "https://bitbucket.org/meszarv/webswing/downloads/webswing-${WEBS
     unzip webswing.zip && \
     rm webswing.zip && \
     mv webswing-* webswing && \
-    # Remove Webswing demos
-    rm -R webswing/demo/ && \
     # Accept ZAP license
     touch AcceptedLicense
     
