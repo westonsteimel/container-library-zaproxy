@@ -17,6 +17,7 @@ jobs:
         image_name: 'zaproxy'
         build_context: '.'
         dockerfile_path: 'Dockerfile'
+        static_tags: 'weekly'
         tag_ref: false
         tag_latest: true
         tag_version: true
