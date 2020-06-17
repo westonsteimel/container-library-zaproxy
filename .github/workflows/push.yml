@@ -6,8 +6,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@master
-    - name: Build and Publish master to DockerHub
-      uses: westonsteimel/action-docker-publish@master
+    - name: Build and Publish main to DockerHub
+      uses: westonsteimel/action-docker-publish@main
       with:
         registry: 'docker.io'
         password: ${{ secrets.DOCKER_PASSWORD }}
