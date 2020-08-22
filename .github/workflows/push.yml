@@ -5,7 +5,7 @@ jobs:
     name: DockerHub Build and Publish weekly
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
+    - uses: actions/checkout@main
     - name: Build and Publish main to DockerHub
       uses: westonsteimel/action-docker-publish@main
       with:

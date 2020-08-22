@@ -1,5 +1,5 @@
-ARG ZAPROXY_VERSION="w2020-06-15"
-ARG WEBSWING_VERSION="20.1.1"
+ARG ZAPROXY_VERSION="w2020-08-17"
+ARG WEBSWING_VERSION="20.1.5"
 
 FROM debian:sid-slim as builder
 
@@ -23,7 +23,7 @@ RUN curl -s https://raw.githubusercontent.com/zaproxy/zap-admin/master/ZapVersio
     cp -R ZAP*/* . &&  \
     rm -R ZAP*
     
-RUN curl -s -L "https://bitbucket.org/meszarv/webswing/downloads/webswing-${WEBSWING_VERSION}.zip" > webswing.zip && \
+RUN curl -s -L "https://storage.googleapis.com/builds.webswing.org/releases/webswing-${WEBSWING_VERSION}.zip" > webswing.zip && \
     unzip webswing.zip && \
     rm webswing.zip && \
     mv webswing-* webswing && \
